@@ -1,3 +1,5 @@
+Backbone = @Backbone or typeof require is 'function' and require 'backbone'
+
 # ViewManager - - - - - - - - - - - - - - - - - - - - - - -
 
 class Backbone.ViewManager extends Backbone.View
