@@ -1,0 +1,6 @@
+.DS_store
+node_modules
+build/*
+
+# to allow anyone to put their project files in a non-shared folder
+project
