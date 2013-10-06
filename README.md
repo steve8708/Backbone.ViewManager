@@ -52,7 +52,7 @@ class MyView extends Backbone.ViewManager
 
 ```coffeescript
 # All emitted and broadcasted events inject a first
-# argument, a Base.Event (similar to a DOM event object)
+# argument, an Event (similar to a DOM event object)
 # that gives listeners some extra information and actions
 
 class View extends Backbone.ViewManager
@@ -74,7 +74,7 @@ class View extends Backbone.ViewManager
 ### Accessing View Nesting and Management
 
 ```coffeescript
-view.children           # => Base.List (evented array) of children
+view.children           # => List (evented array) of children
 view.parent             # => view's immediate parent
 
 view.findView 'name'    # => first view named 'name'
@@ -100,7 +100,7 @@ view.parentViews (view) -> view.
 
 ```coffeescript
 # Or you can always loop through children yourself
-# view.children inherits from Base.List, so it supports
+# view.children inherits from List, so it supports
 # all native array methods as well as all underscore
 # array and collection methods
 view.children.map (child) -> child.toJSON()
