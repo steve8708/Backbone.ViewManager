@@ -15,14 +15,14 @@ class Backbone.ViewManager extends Backbone.View
     if parent
       if /^(child:|request:)/.test eventName
         event = args[0]
-        event ?= new Base.Event type: eventName, target: @
+        event ?= new Event type: eventName, target: @
         if not event.propagationStopped
           event.currentTarget = parent
           # console.log 'trigger args', arguments
           parent.trigger arguments...
       else if not /^(app:|parent:|firstChild:|firstParent:)/.test eventName
         name = uncapitalize @name
-        event = new Base.Event name: eventName, target: @, currentTarget: parent
+        event = new Event name: eventName, target: @, currentTarget: parent
         for newEvent in ["child:#{eventName}", "child:#{name}:#{eventName}"
           "firstChild:#{eventName}", "firstChild:#{name}:#{eventName}"]
           # console.log 'trigger args', [event].concat args
@@ -31,7 +31,7 @@ class Backbone.ViewManager extends Backbone.View
   broadcast: (eventName, args...) ->
     if @children
       if /^(parent:|app:)/.test eventName
-        event = args[0] or new Base.Event type: eventName, target: @
+        event = args[0] or new Event type: eventName, target: @
         if not event.propagationStopped
           event.currentTarget = child
           for child in @children
@@ -40,7 +40,7 @@ class Backbone.ViewManager extends Backbone.View
             child.trigger arguments...
       else if not /^(child:|request:|firstParent:|firstChild:)/.test eventName
         name = uncapitalize @name
-        event = new Base.Event name: eventName, target: @
+        event = new Event name: eventName, target: @
         for child in @children
           event.currentTarget = child
           for newEvent in ["parent:#{eventName}", "parent:#{name}:#{eventName}"
@@ -77,7 +77,7 @@ class Backbone.ViewManager extends Backbone.View
       console.warn 'No view passed to subView', args, arguments
       return
 
-    if view not instanceof Base.View
+    if view not instanceof Backbone.View
       view = new view
 
     view.__viewName__ = name
@@ -169,6 +169,20 @@ class Backbone.ViewManager extends Backbone.View
           if value isnt thisKey
             return false
         return true
+
+
+# Event - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+class Event
+  constructor: (@options) ->
+    _.extend @, @options
+    @currentTarget ?= @target
+
+  preventDefault: ->
+    @defaultPrevented = true
+
+  stopPropagation: ->
+    @propagationStopped = true
 
 
 # Children - - - - - - - - - - - - - - - - - - - - - - - - - - -
