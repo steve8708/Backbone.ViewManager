@@ -1,6 +1,6 @@
 # Backbone.ViewManager
 
-Elevant view hiearchy management and eventing.
+Elegant Backbone view hierarchy management and eventing.
 
 
 ```coffeescript
