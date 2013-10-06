@@ -1,4 +1,4 @@
-/* backbone.viewmanager.js v0.0.2 (coffeescript output) */ 
+/* backbone.viewmanager.js v0.0.3 (coffeescript output) */ 
 
 (function() {
   var Children, method, _i, _j, _len, _len1, _ref, _ref1,
